@@ -13,7 +13,7 @@ class ErrWorker(worker.Worker):
 		proc.run(command)
 		return "Exit code: %s" % proc.get_val('exit_code')
 
-def test():
+def test_hive():
 	apiary = hive.Hive()
 	apiary.create_queen('A1')
 
@@ -23,8 +23,10 @@ def test():
 
 	apiary.start_queen('A2')
 
-	data = ["iscsiadm -m discovery -t st -p 192.168.88.110 -I default","iscsiadm -m discovery -t st -p 192.168.90.110 -I iface1","iscsiadm -m discovery -t st -p 192.168.88.110 -I iface0"]
-	apiary.instruct_queen('A1',data, ErrWorker)
+	jobs = ["iscsiadm -m discovery -t st -p 192.168.88.110",
+            "iscsiadm -m discovery -t st -p 192.168.90.110",
+            "iscsiadm -m discovery -t st -p 192.168.88.110"]
+	apiary.instruct_queen('A1', jobs, ErrWorker)
 
 	apiary.kill_queen('A1')
 
