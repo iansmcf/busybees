@@ -1,10 +1,10 @@
-import hive
 import threading
 import time
 import sys
-import worker
 
-# import pash from another directory
+from busybees import worker
+from busybees import hive
+
 import pash
 
 class ErrWorker(worker.Worker):
@@ -12,6 +12,7 @@ class ErrWorker(worker.Worker):
 		proc = pash.ShellProc()
 		proc.run(command)
 		return "Exit code: %s" % proc.get_val('exit_code')
+
 def test():
 	apiary = hive.Hive()
 	apiary.create_queen('A1')
