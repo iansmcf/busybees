@@ -37,4 +37,3 @@ def test_hive():
     for key in results.keys():
         for i in results[key]:
             assert i != '' and i != None
-
