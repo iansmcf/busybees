@@ -20,10 +20,13 @@ def test_hive():
     apiary.start_queen('A1')
     apiary.start_queen('A2')
 
-    jobs = ["iscsiadm -m discovery -t st -p 192.168.88.110",
+    job1 = ["iscsiadm -m discovery -t st -p 192.168.88.110",
             "iscsiadm -m discovery -t st -p 192.168.90.110",
             "iscsiadm -m discovery -t st -p 192.168.88.110"]
-    apiary.instruct_queen('A1', jobs, ErrWorker)
+    apiary.instruct_queen('A1', job1, ErrWorker)
+
+    job2 = ["ls -l ~", "date", "cal"]
+    apiary.instruct_queen('A2', job2)
 
     apiary.kill_queen('A1')
 
@@ -33,7 +36,5 @@ def test_hive():
 
     for key in this.keys():
         for i in this[key]:
-            assert i == "Exit code: 6"
-            print i
+            assert i != '' and i != None
 
-    sys.exit(0)
