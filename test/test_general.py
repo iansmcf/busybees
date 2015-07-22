@@ -32,9 +32,9 @@ def test_hive():
 
     time.sleep(3)
 
-    this = apiary.die()
+    results = apiary.die()
 
-    for key in this.keys():
-        for i in this[key]:
+    for key in results.keys():
+        for i in results[key]:
             assert i != '' and i != None
 
